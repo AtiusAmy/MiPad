@@ -1,7 +1,7 @@
 # Allow build scripts to be referenced without being copied into the final image
 FROM scratch AS ctx
 COPY build_files /
-
+COPY system_files /
 # Base Image
 FROM quay.io/pocketblue/xiaomi-nabu-gnome-mobile:43
 
