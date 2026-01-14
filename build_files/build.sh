@@ -35,7 +35,9 @@ dnf -y install --enablerepo=fedora-multimedia \
 dnf5 copr enable -y secureblue/trivalent
 dnf5 copr enable -y secureblue/run0edit
 
-dnf5 install -y trivalent-subresource-filter adw-gtk3-theme run0edit distrobox
+dnf5 install -y trivalent-subresource-filter adw-gtk3-theme run0edit distrobox --skip-unavailable
+dnf5 copr disable -y secureblue/trivalent
+dnf5 copr disable -y secureblue/run0edit
 
 dnf -y copr enable ublue-os/packages
 dnf -y copr disable ublue-os/packages
