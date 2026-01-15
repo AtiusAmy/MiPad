@@ -60,6 +60,8 @@ install: \n\
     - Blur my Shell # https://extensions.gnome.org/extension/3193/blur-my-shell/ \n\
     - Battery Health Charging # https://extensions.gnome.org/extension/5724/battery-health-charging/ \n\
     - Screen Rotate # https://extensions.gnome.org/extension/5389/screen-rotate/ \n\
+    - TouchUp # https://extensions.gnome.org/extension/8102/touchup/ \n\
+    - GJS OSK # https://extensions.gnome.org/extension/5949/gjs-osk/ \n\
 ' && \
 /tmp/scripts/run_module.sh "$(echo "$config" | yq eval '.type')" "$(echo "$config" | yq eval -o=j -I=0)"
 
