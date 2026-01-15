@@ -40,6 +40,27 @@ RUN --mount=type=cache,dst=/var/cache \
 ### MODIFICATIONS
 ## make modifications desired in your image and install packages by modifying the build.sh script
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
+# CentOS base images: quay.io/centos-bootc/centos-bootc:stream10
+# `yq` be used to pass BlueBuild modules configuration written in yaml
+COPY --from=docker.io/mikefarah/yq /usr/bin/yq /usr/bin/yq
+
+RUN \
+  # add in the module source code
+  --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
+  # add in the script that sets up the module run environment
+  --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
+  
+# run the module
+config=$'\
+type: gnome-extensions \n\
+install: \n\
+    - Caffeine # https://extensions.gnome.org/extension/517/caffeine/ \n\
+    - AppIndicator and KStatusNotifierItem Support # https://extensions.gnome.org/extension/615/appindicator-support/ \n\
+    - Blur my Shell # https://extensions.gnome.org/extension/3193/blur-my-shell/ \n\
+    - Battery Health Charging # https://extensions.gnome.org/extension/5724/battery-health-charging/ \n\
+    - Screen Rotate # https://extensions.gnome.org/extension/5389/screen-rotate/ \n\
+' && \
+/tmp/scripts/run_module.sh "$(echo "$config" | yq eval '.type')" "$(echo "$config" | yq eval -o=j -I=0)"
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \

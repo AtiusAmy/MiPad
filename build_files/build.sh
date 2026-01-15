@@ -57,6 +57,7 @@ if [ "$(rpm -E "%{fedora}")" == 43 ] ; then
   rpm -q flatpak --qf "%{NAME} %{VENDOR}\n" | grep ublue-os
 fi
 
+dnf5 -y uninstall gnome-software* toolbox
 
 
 # Use a COPR Example:
