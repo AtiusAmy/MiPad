@@ -35,7 +35,7 @@ dnf -y install --enablerepo=fedora-multimedia \
 dnf5 copr enable -y secureblue/trivalent
 dnf5 copr enable -y secureblue/run0edit
 
-dnf5 install -y trivalent-subresource-filter adw-gtk3-theme run0edit distrobox --skip-unavailable
+dnf5 install -y trivalent-subresource-filter adw-gtk3-theme run0edit distrobox gnome-disk-utility adwaita-fonts-all just --skip-unavailable
 dnf5 copr disable -y secureblue/trivalent
 dnf5 copr disable -y secureblue/run0edit
 
@@ -57,7 +57,7 @@ if [ "$(rpm -E "%{fedora}")" == 43 ] ; then
   rpm -q flatpak --qf "%{NAME} %{VENDOR}\n" | grep ublue-os
 fi
 
-dnf5 -y uninstall gnome-software* toolbox
+dnf5 -y remove gnome-software* toolbox
 
 
 # Use a COPR Example:
