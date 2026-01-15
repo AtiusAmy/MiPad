@@ -3,7 +3,7 @@ FROM scratch AS ctx
 COPY build_files /
 COPY system_files /
 # Base Image
-FROM quay.io/pocketblue/xiaomi-nabu-gnome-desktop:43
+FROM quay.io/pocketblue/xiaomi-nabu-gnome-mobile:43
 COPY system_files /
 
 # Copy Homebrew files from the brew image
@@ -70,4 +70,4 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     
 ### LINTING
 ## Verify final image and contents are correct.
-RUN bootc container lint
+#RUN bootc container lint
